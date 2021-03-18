@@ -26,7 +26,6 @@ public class Main extends Application {
 
         AnimatedCanvas canvas = new AnimatedCanvas(800, 800);
         Animator animator = new Animator(canvas);
-        animator.getRateProperty().set(1);
 
         VBox controlBox = new VBox();
         controlBox.setAlignment(Pos.TOP_CENTER);
@@ -135,6 +134,10 @@ public class Main extends Application {
         TextField generalStartingVelocityField = new TextField();
         generalStartingVelocityField.setText("1");
 
+        Label generalFrameOpacityLabel = new Label("Frame Opacity");
+        TextField generalFrameOpacityField = new TextField();
+        generalFrameOpacityField.setText("0.5");
+
         generalPane.add(generalParticlesLabel, 0, 0);
         generalPane.add(generalParticlesField, 1, 0);
 
@@ -146,6 +149,9 @@ public class Main extends Application {
 
         generalPane.add(generalStartingVelocityLabel, 0, 3);
         generalPane.add(generalStartingVelocityField, 1, 3);
+
+        generalPane.add(generalFrameOpacityLabel, 0, 4);
+        generalPane.add(generalFrameOpacityField, 1, 4);
 
         CheckBox collisonsEnabled = new CheckBox("Collisions");
         collisonsEnabled.setSelected(true);
@@ -167,6 +173,7 @@ public class Main extends Application {
                 double particleSize = Double.parseDouble(generalParticleSizeField.getText());
                 double particleElasticity = Double.parseDouble(generalElasticityField.getText());
                 double startingVelocity = Double.parseDouble(generalStartingVelocityField.getText());
+                double frameOpacity = Double.parseDouble(generalFrameOpacityField.getText());
 
                 driver.setShapeRadius(shapeRadius);
                 driver.setShapeAngle(Math.toRadians(shapeAngle));
@@ -182,6 +189,8 @@ public class Main extends Application {
                 driver.setParticleElasticity(particleElasticity);
                 driver.setStartingVelocity(startingVelocity);
                 driver.setParticleCollisions(collisonsEnabled.isSelected());
+
+                canvas.setFrameOpacity(frameOpacity);
             } catch (NumberFormatException ex) {
                 System.out.println("[ERROR]: bad number format");
             }

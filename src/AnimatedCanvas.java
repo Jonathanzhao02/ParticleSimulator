@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
  * Custom Canvas class for displaying animation visuals.
  */
 public class AnimatedCanvas extends Canvas {
-    private static final Color OPAQUE_COLOR = Color.color(0, 0, 0, 0.5);
+    private Color opaqueColor = Color.color(0, 0, 0, 0.5);
     private AnimationDriver driver;
 
     /**
@@ -40,7 +40,7 @@ public class AnimatedCanvas extends Canvas {
      */
     private void partialClear() {
         getGraphicsContext2D().setStroke(Color.TRANSPARENT);
-        getGraphicsContext2D().setFill(OPAQUE_COLOR);
+        getGraphicsContext2D().setFill(opaqueColor);
         getGraphicsContext2D().fillRect(0, 0, getWidth(), getHeight());
     }
 
@@ -58,6 +58,10 @@ public class AnimatedCanvas extends Canvas {
     public void step() {
         partialClear();
         driver.run();
+    }
+
+    public void setFrameOpacity(double opacity) {
+        this.opaqueColor = Color.color(0, 0, 0, opacity);
     }
 
     /**

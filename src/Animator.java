@@ -1,7 +1,6 @@
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.property.DoubleProperty;
 import javafx.util.Duration;
 
 /**
@@ -22,6 +21,7 @@ public class Animator {
         keyFrame = new KeyFrame(Duration.millis(10), e -> canvas.step());
         timeline = new Timeline(keyFrame);
         timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.setRate(1);
     }
 
     /**
@@ -48,13 +48,5 @@ public class Animator {
      */
     public void stop() {
         timeline.stop();
-    }
-
-    /**
-     * Get the rateProperty for the timeline.
-     * @return The rate property for the timeline.
-     */
-    public DoubleProperty getRateProperty() {
-        return timeline.rateProperty();
     }
 }
